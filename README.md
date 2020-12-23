@@ -1,2 +1,2 @@
 # math-mouse
-A mouse can do math.
+A mouse can do the math.
