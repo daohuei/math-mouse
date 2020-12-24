@@ -2,6 +2,12 @@
 
 A mouse can do the math.
 
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Docker Image Build](#docker-image-build)
+  - [Development Environment](#development-environment)
+- [Acknowledgement](#acknowledgement)
+
 ## Getting Started
 
 ### Prerequisites
