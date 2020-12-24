@@ -6,7 +6,7 @@ echo "$WORKSPACE"
 
 DOCKER_BUILD_IMAGE=math-mouse-base
 docker build --no-cache \
-    -f Dockerfile.base \
-    -t $DOCKER_BUILD_IMAGE:${DATE} .
+  -f Dockerfile.base \
+  -t $DOCKER_BUILD_IMAGE:${DATE} .
 
 docker tag $DOCKER_BUILD_IMAGE:${DATE} $DOCKER_BUILD_IMAGE:latest
