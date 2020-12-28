@@ -1,4 +1,4 @@
 all: prettier
 
 prettier:
-	@prettier --write "**/*.{sh,md,py}"
+	@prettier --write "**/*.{sh,md}"
