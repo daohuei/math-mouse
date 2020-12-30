@@ -1,5 +1,5 @@
 import numpy as np
-from logger import error, logger
+from logger import error, Logger
 
 
 def basic_linear(_x, _b):
@@ -15,7 +15,7 @@ def basic_linear(_x, _b):
 
 
 if __name__ == "__main__":
-    main_logger = logger.Logger(__name__)
+    main_logger = Logger(__name__)
     main_logger.info("Math Mouse started the calculation!")
     try:
         x = np.arange(15).reshape(3, 5)
