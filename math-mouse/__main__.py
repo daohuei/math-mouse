@@ -37,6 +37,16 @@ def get_weight_with_ls(x, y):
     return b
 
 
+def knn(k, y_neighbor):
+    """
+    K Nearest Neighbors:
+    Use k nearest points (closeness defined as Euclidean Distance) 
+    and get the average prediction for classification.
+    Y^hat = 1/k sum(y_from_neighbors_of_x)
+    """
+    return np.sum(y_neighbor) / k
+
+
 if __name__ == "__main__":
     main_logger = Logger(__name__)
     main_logger.info("Math Mouse started the calculation!")
