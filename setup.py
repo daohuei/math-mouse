@@ -19,8 +19,7 @@ def setup_package():
             "typer",
             "numpy",
             "pandas",
-            "sklearn",
-            "plotly"
+            "sklearn"
         ],
     )
 
