@@ -10,7 +10,7 @@ def basic_linear(x, b):
     X: Input Data/Training Data
     B_hat: Coefficients/Weights
     """
-    y = x@b
+    y = x @ b
     return y
 
 
@@ -33,14 +33,14 @@ def get_weight_with_ls(x, y):
     We can get weights with the method of least square given X: input data and Y: true value.
     B^hat = (X^T X)^(-1) X^T y
     """
-    b = np.linalg.inv(x.T@x)@x.T@y
+    b = np.linalg.inv(x.T @ x) @ x.T @ y
     return b
 
 
 def knn(k, y_neighbor):
     """
     K Nearest Neighbors:
-    Use k nearest points (closeness defined as Euclidean Distance) 
+    Use k nearest points (closeness defined as Euclidean Distance)
     and get the average prediction for classification.
     Y^hat = 1/k sum(y_from_neighbors_of_x)
     """

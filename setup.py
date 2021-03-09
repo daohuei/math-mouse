@@ -15,12 +15,7 @@ def setup_package():
         # Note: many of these required packages are included in base python
         # but are listed here because different linux distros use custom
         # python installations.  And users can remove packages at any point
-        install_requires=[
-            "typer",
-            "numpy",
-            "pandas",
-            "sklearn"
-        ],
+        install_requires=["typer", "numpy", "pandas", "sklearn"],
     )
 
 
