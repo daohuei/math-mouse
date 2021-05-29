@@ -6,6 +6,7 @@ function [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters)
     % Initialize some useful values
     m = length(y); % number of training examples
     J_history = zeros(num_iters, 1);
+    c = 1;
 
     for iter = 1:num_iters
 
@@ -16,11 +17,11 @@ function [theta, J_history] = gradientDescent(X, y, theta, alpha, num_iters)
         % Hint: While debugging, it can be useful to print out the values
         %       of the cost function (computeCost) and gradient here.
         %
-
+        theta = theta - (alpha / m) * (X') * ((X * theta) - y);
         % ============================================================
 
         % Save the cost J in every iteration
-        J_history(iter) = computeCost(X, y, theta);
+        J_history(iter) = sum(computeCost(X, y, theta));
 
     end
 

@@ -12,6 +12,8 @@ function J = computeCost(X, y, theta)
     % ====================== YOUR CODE HERE ======================
     % Instructions: Compute the cost of a particular choice of theta
     %               You should set J to the cost.
+    prediction = theta' * X';
+    J = sum((y' - prediction).^2) / (2 * m);
 
     % =========================================================================
 
