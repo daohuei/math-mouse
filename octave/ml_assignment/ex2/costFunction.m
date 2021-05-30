@@ -19,6 +19,9 @@ function [J, grad] = costFunction(theta, X, y)
     %
     % Note: grad should have the same dimensions as theta
     %
+    J = sum(((-1 .* y) .* log(sigmoid(X * theta)) - ((-1 .* y + 1)) .* log(sigmoid(X * theta) .* (-1) + 1))) ./ m;
+
+    grad = (X' * (sigmoid(X * theta) - y)) ./ m;
 
     % =============================================================
 
