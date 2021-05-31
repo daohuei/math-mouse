@@ -35,7 +35,11 @@ function [J, grad] = lrCostFunction(theta, X, y, lambda)
     %           temp(1) = 0;   % because we don't add anything for j = 0
     %           grad = grad + YOUR_CODE_HERE (using the temp variable)
     %
-
+    grad = (X' * (sigmoid(X * theta) - y)) ./ m;
+    temp = theta;
+    temp(1) = 0; % because we don't add anything for j = 0
+    J = sum(((-1 .* y) .* log(sigmoid(X * theta)) - ((-1 .* y + 1)) .* log(sigmoid(X * theta) .* (-1) + 1))) ./ m + lambda .* sum(temp.^2) ./ (2 .* m);
+    grad = grad + (lambda / m) .* temp;
     % =============================================================
 
     grad = grad(:);

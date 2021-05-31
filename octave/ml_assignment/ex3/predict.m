@@ -21,6 +21,17 @@ function p = predict(Theta1, Theta2, X)
     %       can use max(A, [], 2) to obtain the max for each row.
     %
 
+    % Add ones to the X data matrix
+    X = [ones(m, 1) X];
+    z1 = X * Theta1';
+    a2 = sigmoid(z1);
+    a2 = [ones(m, 1) a2];
+    z2 = a2 * Theta2';
+    a3 = sigmoid(z2);
+
+    [maxval indices] = max(a3, [], 2);
+    p = indices;
+
     % =========================================================================
 
 end

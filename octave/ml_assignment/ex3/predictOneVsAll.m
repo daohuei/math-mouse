@@ -29,7 +29,9 @@ function p = predictOneVsAll(all_theta, X)
     %       are in rows, then, you can use max(A, [], 2) to obtain the max
     %       for each row.
     %
-
+    result = sigmoid(X * all_theta');
+    [maxval indices] = max(result, [], 2);
+    p = indices;
     % =========================================================================
 
 end
