@@ -39,6 +39,30 @@ function [J grad] = nnCostFunction(nn_params, ...
     %         cost function computation is correct by verifying the cost
     %         computed in ex4.m
     %
+
+    X = [ones(m, 1) X];
+    z2 = X * Theta1';
+    a2 = sigmoid(z2);
+    a2 = [ones(m, 1) a2];
+    z3 = a2 * Theta2';
+    y_hat = sigmoid(z3);
+    new_y = zeros(m, num_labels);
+
+    for i = 1:m
+        new_y(i, y(i)) = 1;
+    end
+
+    J = (1 / m) * sum (sum ((-1 * new_y) .* log(y_hat) - (1 - new_y) .* log(1 - y_hat)));
+
+    t1 = Theta1(:, 2:size(Theta1, 2));
+    t2 = Theta2(:, 2:size(Theta2, 2));
+
+    % Regularization
+    Reg = lambda * (sum(sum (t1.^2)) + sum(sum (t2.^2))) / (2 * m);
+
+    % Regularized cost function
+    J = J + Reg;
+
     % Part 2: Implement the backpropagation algorithm to compute the gradients
     %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
     %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -54,6 +78,26 @@ function [J grad] = nnCostFunction(nn_params, ...
     %               over the training examples if you are implementing it for the
     %               first time.
     %
+    for i = 1:m
+        a1 = X(i, :);
+        a1 = a1';
+        z2 = Theta1 * a1;
+        a2 = sigmoid(z2);
+        a2 = [1; a2];
+        z3 = Theta2 * a2;
+        y_hat = sigmoid(z3);
+        error3 = y_hat - new_y(i, :)';
+        z2 = [1; z2];
+        error2 = (Theta2' * error3) .* sigmoidGradient(z2);
+
+        error2 = error2(2:end); % we do not need the first element
+
+        Theta2_grad = Theta2_grad + error3 * a2';
+        Theta1_grad = Theta1_grad + error2 * a1';
+    end
+
+    Theta2_grad = (1 / m) * Theta2_grad;
+    Theta1_grad = (1 / m) * Theta1_grad;
     % Part 3: Implement regularization with the cost function and gradients.
     %
     %         Hint: You can implement this around the code for
@@ -63,6 +107,9 @@ function [J grad] = nnCostFunction(nn_params, ...
     %
 
     % -------------------------------------------------------------
+    % only implement on non-constant features
+    Theta2_grad(:, 2:end) = Theta2_grad(:, 2:end) + (lambda / m) * Theta2(:, 2:end);
+    Theta1_grad(:, 2:end) = Theta1_grad(:, 2:end) + (lambda / m) * Theta1(:, 2:end);
 
     % =========================================================================
 
