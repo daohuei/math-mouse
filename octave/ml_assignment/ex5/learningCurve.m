@@ -55,6 +55,17 @@ function [error_train, error_val] = ...
 
     % -------------------------------------------------------------
 
+    for i = 1:m
+        % Compute train/cross validation errors using training examples
+        % X(1:i, :) and y(1:i), storing the result in
+        % error_train(i) and error_val(i)
+        X_train = X(1:i, :);
+        Y_train = y(1:i);
+        theta = trainLinearReg(X_train, Y_train, lambda);
+        error_train(i) = linearRegCostFunction(X_train, Y_train, theta, 0);
+        error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+    end
+
     % =========================================================================
 
 end
