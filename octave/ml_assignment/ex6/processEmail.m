@@ -95,6 +95,14 @@ function word_indices = processEmail(email_contents)
             % Note: You can use strcmp(str1, str2) to compare two strings (str1 and
             %       str2). It will return 1 only if the two strings are equivalent.
             %
+            for vocab_index = 1:size(vocabList, 1)
+
+                if (strcmp(vocabList(vocab_index), str))
+                    word_indices = [word_indices; vocab_index];
+                    break;
+                end
+
+            end
 
             % =============================================================
 

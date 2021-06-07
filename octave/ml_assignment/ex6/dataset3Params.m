@@ -22,6 +22,27 @@ function [C, sigma] = dataset3Params(X, y, Xval, yval)
     %  Note: You can compute the prediction error using
     %        mean(double(predictions ~= yval))
     %
+    candidates = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
+    min_error = realmax;
+
+    for c_index = 1:size(candidates, 2)
+
+        for sigma_index = 1:size(candidates, 2)
+            c_candidate = candidates(c_index);
+            sigma_candidate = candidates(sigma_index);
+            model = svmTrain(X, y, c_candidate, @(x1, x2) gaussianKernel(x1, x2, sigma_candidate));
+            predictions = svmPredict(model, Xval);
+            new_error = mean(double(predictions ~= yval));
+
+            if (new_error < min_error)
+                min_error = new_error;
+                C = c_candidate;
+                sigma = sigma_candidate;
+            end
+
+        end
+
+    end
 
     % =========================================================================
 
