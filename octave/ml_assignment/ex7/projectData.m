@@ -17,6 +17,8 @@ function Z = projectData(X, U, K)
     %                    x = X(i, :)';
     %                    projection_k = x' * U(:, k);
     %
+    U_reduce = U(:, 1:K);
+    Z = X * U_reduce;
 
     % =============================================================
 

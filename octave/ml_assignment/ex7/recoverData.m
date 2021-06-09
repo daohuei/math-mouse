@@ -20,7 +20,8 @@ function X_rec = recoverData(Z, U, K)
     %
     %               Notice that U(j, 1:K) is a row vector.
     %
-
+    U_reduce = U(:, 1:K);
+    X_rec = Z * U_reduce';
     % =============================================================
 
 end

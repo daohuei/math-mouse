@@ -21,6 +21,23 @@ function idx = findClosestCentroids(X, centroids)
     % Note: You can use a for-loop over the examples to compute this.
     %
 
+    for i = 1:size(X, 1)
+        min_j = realmax;
+        min_index = 1;
+
+        for j = 1:K
+            j_cost = sum((X(i, :) - centroids(j, :)).^2);
+
+            if (j_cost < min_j)
+                min_j = j_cost;
+                min_index = j;
+            end
+
+        end
+
+        idx(i) = min_index;
+    end
+
     % =============================================================
 
 end
