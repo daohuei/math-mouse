@@ -23,7 +23,13 @@ function [bestEpsilon bestF1] = selectThreshold(yval, pval)
         %
         % Note: You can use predictions = (pval < epsilon) to get a binary vector
         %       of 0's and 1's of the outlier predictions
-
+        predictions = (pval < epsilon);
+        predicted_positve = sum(predictions);
+        actual_positive = sum(yval);
+        tp = sum(predictions .* yval);
+        precision = tp / predicted_positve;
+        recall = tp / actual_positive;
+        F1 = 2 * (precision * recall) / (precision + recall);
         % =============================================================
 
         if F1 > bestF1

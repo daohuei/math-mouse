@@ -21,6 +21,14 @@ function [mu sigma2] = estimateGaussian(X)
     %               should contain variance of the i-th feature.
     %
 
+    mu = mean(X, 1)'; % (n,1)
+
+    for i = 1:m
+        sigma2 = sigma2 + (X(i, :)' - mu).^2;
+    end
+
+    sigma2 = sigma2 / m;
+
     % =============================================================
 
 end

@@ -39,6 +39,27 @@ function [J, grad] = cofiCostFunc(params, Y, R, num_users, num_movies, ...
     %                     partial derivatives w.r.t. to each element of Theta
     %
 
+    % disp(size(Y)) %(movie, user)
+    % disp(size(Theta)) % (user, feat)
+    % disp(size(R)) % (movie, user)
+    % disp(size(X))% (movie, feat)
+
+    prediction = X * Theta';
+    diff = prediction - Y; %(movie, user)
+    diff_squared = diff.^2;
+    valid_diff_squared = diff_squared .* R;
+    J = (1/2) * sum(sum(valid_diff_squared));
+
+    X_grad = (diff .* R) * Theta;
+    Theta_grad = (diff .* R)' * X;
+
+    Theta_reg = (lambda / 2) * sum(sum(Theta.^2));
+    X_reg = (lambda / 2) * sum(sum(X.^2));
+
+    J = J + Theta_reg + X_reg;
+
+    X_grad = X_grad + lambda * X;
+    Theta_grad = Theta_grad + lambda * Theta;
     % =============================================================
 
     grad = [X_grad(:); Theta_grad(:)];
