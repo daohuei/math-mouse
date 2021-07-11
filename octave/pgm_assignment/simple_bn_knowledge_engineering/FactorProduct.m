@@ -55,6 +55,7 @@ function C = FactorProduct(A, B)
             % Compute some helper indices
             % These will be very useful for calculating C.val
             % so make sure you understand what these lines are doing.
+            % this is for getting the matching assignments index of A and B in the cardinality of C
             assignments = IndexToAssignment(1:prod(C.card), C.card);
             indxA = AssignmentToIndex(assignments(:, mapA), A.card);
             indxB = AssignmentToIndex(assignments(:, mapB), B.card);
@@ -63,7 +64,7 @@ function C = FactorProduct(A, B)
             % YOUR CODE HERE:
             % Correctly populate the factor values of C
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+            C.val = A.val(indxA) .* B.val(indxB);
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
         end

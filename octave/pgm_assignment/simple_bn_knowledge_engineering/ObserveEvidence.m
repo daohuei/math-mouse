@@ -11,7 +11,7 @@
 function F = ObserveEvidence(F, E)
 
     % Iterate through all evidence
-
+    % go through every evidences
     for i = 1:size(E, 1),
         v = E(i, 1); % variable
         x = E(i, 2); % value
@@ -21,14 +21,15 @@ function F = ObserveEvidence(F, E)
             warning(['Evidence not set for variable ', int2str(v)]);
             continue;
             end;
-
+            % go through every factor
             for j = 1:length(F),
-                % Does factor contain variable?
+                % find the index that the factor contains variable of the evidence
                 indx = find(F(j).var == v);
-
+                % if not empty
                 if (~isempty(indx)),
 
                     % Check validity of evidence
+                    % if x is exist the cardinaliy or less than 0, means invalid here
                     if (x > F(j).card(indx) || x < 0),
                         error(['Invalid evidence, X_', int2str(v), ' = ', int2str(x)]);
                         end;
@@ -39,6 +40,16 @@ function F = ObserveEvidence(F, E)
                         % Hint: You might find it helpful to use IndexToAssignment
                         %       and SetValueOfAssignment
                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                        % go through every probability in the factor
+                        for k = 1:length(F(j).val)
+                            % get the index assignments
+                            assignments = IndexToAssignment (k, F(j).card);
+                            % clear all the value if their assignment is not x
+                            if assignments(indx(1)) ~= x
+                                F(j).val(k) = 0;
+                            end
+
+                        end
 
                         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

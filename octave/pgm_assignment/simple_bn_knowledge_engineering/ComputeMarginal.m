@@ -26,7 +26,19 @@ function M = ComputeMarginal(V, F, E)
     % Remember to renormalize the entries of M!
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-    M = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
+    Joint = ComputeJointDistribution(F);
+    Evi = ObserveEvidence(Joint, E);
+
+    % get the variables to be marginalized
+    marginalized_var = setdiff(Joint.var, V);
+    % get the unnorm marginalized probability distribution
+    M = FactorMarginalization(Evi, marginalized_var);
+    % sum them up
+    s = sum (M.val);
+    % calculate all their probability with the sum
+    for i = 1:length(M.val)
+        M.val(i) = M.val(i) / s;
+    end
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end

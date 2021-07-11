@@ -38,6 +38,10 @@ function B = FactorMarginalization(A, V)
             % YOUR CODE HERE
             % Correctly populate the factor values of B
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            % add all value of A into the assigned B position
+            for i = 1:length(indxB)
+                B.val(indxB(i)) = B.val(indxB(i)) + A.val(i);
+            end
 
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         end
